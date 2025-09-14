@@ -38,9 +38,10 @@ class TaskController extends Controller
             $query= Task::where('user_id', $userData['id']);
 
             $tasks= $query->when($filtroConcluidas, function($query) {
-                return $query->where('status', '!=', 'concluido');
+                return $query->where('status', 'NOT ILIKE', 'concluido');
             })
-            ->orderBy('agenda')->get();
+            ->orderBy('agenda')
+            ->get();
 
             return response()->json([
                 'success'=> true,
