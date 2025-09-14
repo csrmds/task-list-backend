@@ -12,11 +12,9 @@ Route::get('/user', function (Request $request) {
 
 Route::get('/teste', function () {
     try {
-		\DB::connection()->getPdo();
+		$pdo= \DB::connection()->getPdo();
 
-		$config= DB::connection()->getConfig();
-
-	    return response()->json($config);
+	    return response()->json($pdo);
 	} catch (\Exception $e) {
 		return 'Erro na conexão: ' . $e->getMessage();
 	}
