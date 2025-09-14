@@ -1,6 +1,6 @@
 {
     "$schema": "https://getcomposer.org/schema.json",
-    "name": "laravel/laravel",
+    "name": "laravel/tasklist-backend",
     "type": "project",
     "description": "The skeleton application for the Laravel framework.",
     "keywords": [
@@ -10,7 +10,11 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "doctrine/dbal": "^4.3",
+        "google/apiclient": "^2.18",
         "laravel/framework": "^12.0",
+        "laravel/sanctum": "^4.0",
+        "laravel/socialite": "^5.23",
         "laravel/tinker": "^2.10.1"
     },
     "require-dev": {
