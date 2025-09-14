@@ -148,24 +148,10 @@ class UserController extends Controller {
 
             
         } catch(\Exception $e) {
-            $dbConnection= env('DBA_CONNECTION');
-            $dbHost= env('DBA_HOST');
-            $dbUrl= env('DBA_URL');
-            $dbUser= env('DBA_USERNAME');
-            $dbPort= env('DBA_PORT');
-            $dbDatabase= env('DBA_DATABASE');
-            //$dbPassword= env('DB_PASSWORD');
-
             return response()->json([
                 'success'=> false,
                 'message'=> 'Erro ao fazer login',
                 'error'=> $e->getMessage(),
-                'data'=> [
-                    'connection'=> $dbConnection, 
-                    'host'=> $dbHost, 
-                    'database'=> $dbDatabase, 
-                    'user'=> $dbUser, 
-                    'port'=> $dbPort ]
             ]);
         }
 

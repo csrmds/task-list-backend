@@ -40,7 +40,7 @@ class TaskController extends Controller
             $tasks= $query->when($filtroConcluidas, function($query) {
                 return $query->where('status', '!=', 'concluido');
             })
-            ->orderBy('agenda_inicio')->get();
+            ->orderBy('agenda')->get();
 
             return response()->json([
                 'success'=> true,
@@ -60,7 +60,7 @@ class TaskController extends Controller
         $user= Auth::user();
 
         $this->task->resumo= $data['resumo'];
-        $this->task->agenda_inicio= $data['agenda_inicio'];
+        $this->task->agenda= $data['agenda'];
         $this->task->status= $data['status'];
         $this->task->google_calendar_id= $data['google_calendar_id'];
         $this->task->google_calendar_link= $data['google_calendar_link'];
@@ -102,7 +102,7 @@ class TaskController extends Controller
             
             $task= Task::find($id);
             $task->resumo= $taskData['resumo'];
-            $task->agenda_inicio= $taskData['agenda_inicio'];
+            $task->agenda= $taskData['agenda'];
             $task->status= $taskData['status'];
             
             $task->save();
