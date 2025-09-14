@@ -68,7 +68,7 @@ class UserController extends Controller {
     }
 
     public function authCallback(Request $request) {
-        $frontendUrl= env('APP_URL');
+        $frontendUrl= env('APP_FRONTEND_URL');
         
         try {
             $googleUser= Socialite::driver('google')->stateless()->user();
