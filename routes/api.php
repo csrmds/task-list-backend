@@ -24,43 +24,19 @@ Route::post('/gcalendar/updateevent', [App\Http\Controllers\GoogleCalendarContro
 Route::post('/gcalendar/deleteevent', [App\Http\Controllers\GoogleCalendarController::class, 'deleteEvent'])->middleware('auth:sanctum');
 
 
-Route::get('/teste', function () {
-    try {
-		$pdo= getenv();
+Route::get('/wakeup', function() {
+	try {
+		$result= DB::select('select now() as now');
 
-	    return response()->json($pdo);
-	} catch (\Exception $e) {
-		return 'Erro na conexão: ' . $e->getMessage();
+		return response()->json([
+			'status'=> 'ok',
+			'database_time'=> $result[0]->now ?? null
+		]);
+	} catch(\Exception $e) {
+		return response()->json([
+			'status'=> 'error',
+			'message'=> $e->getMessage()
+		], 500);
 	}
 });
 
-Route::get('/teste2', function () {
-    try {
-		$user= User::all();
-
-	    return response()->json($user);
-	} catch (\Exception $e) {
-		return 'Erro na conexão: ' . $e->getMessage();
-	}
-});
-
-Route::get('/teste3', function () {
-    try {
-		$dataBase= DB::connection()->getDatabaseName();
-		//$x= DB::connection()->getConfig();
-
-		$envVars= [
-			'dbConnection'=> env('DB_CONNECTION'),
-			'dbHost'=> env('DB_HOST'),
-			'dbPort'=> env('DB_PORT'),
-			'dbDatabase'=> env('DB_DATABASE'),
-			'dbUser'=> env('DB_USERNAME'),
-		];
-
-		//$connection= \DB::connection()->getDatabaseName();
-
-	    return response()->json([$envVars, $dataBase]);
-	} catch (\Exception $e) {
-		return 'Erro na conexão: ' . $e->getMessage();
-	}
-});
